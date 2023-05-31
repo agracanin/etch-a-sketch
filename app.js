@@ -1,10 +1,13 @@
 const board = document.querySelector("#board");
 const clearBtn = document.querySelector('#clear');
 const slider = document.querySelector("#slider");
-const valueText = document.querySelector("#sizeValue")
-let mouseIsDown = false;
+const valueText = document.querySelector("#sizeValue");
+const colorPicker = document.querySelector("#color");
 
+
+let mouseIsDown = false;
 let size = slider.value;
+let color = colorPicker.value;
 
 clearBtn.onclick = () => clearGrid()
 
@@ -12,6 +15,10 @@ slider.addEventListener("input", function () {
     valueText.innerHTML = `${slider.value} x ${slider.value}`;
     size = slider.value;
     clearGrid();
+})
+
+colorPicker.addEventListener("input", function () {
+    color = colorPicker.value;
 })
 
 function createBoard(size) {
@@ -26,13 +33,13 @@ function createBoard(size) {
 
         div.addEventListener("mousedown", function (event) {
             event.preventDefault();
-            div.style.backgroundColor = 'red';
+            div.style.backgroundColor = color;
             mouseIsDown = true;
         })
 
         div.addEventListener("mouseover", function () {
             if (mouseIsDown) {
-                div.style.backgroundColor = 'red';
+                div.style.backgroundColor = color;
             }
         })
 
