@@ -3,23 +3,41 @@ const clearBtn = document.querySelector('#clear');
 const slider = document.querySelector("#slider");
 const valueText = document.querySelector("#sizeValue");
 const colorPicker = document.querySelector("#color");
+const optionBtns = document.querySelectorAll(".options-btn");
 
 
 let mouseIsDown = false;
+
+document.body.onmousedown = () => (mouseIsDown = true)
+document.body.onmouseup = () => (mouseIsDown = false)
+
 let size = slider.value;
 let color = colorPicker.value;
+let mode = "color";
 
 clearBtn.onclick = () => clearGrid()
 
-slider.addEventListener("input", function () {
+colorPicker.addEventListener("input", () => {
+    color = colorPicker.value;
+})
+
+slider.addEventListener("input", () => {
     valueText.innerHTML = `${slider.value} x ${slider.value}`;
     size = slider.value;
     clearGrid();
 })
 
-colorPicker.addEventListener("input", function () {
-    color = colorPicker.value;
-})
+optionBtns.forEach(function (button) {
+    button.addEventListener('click', function () {
+        optionBtns.forEach(function (btn) {
+            btn.classList.remove('active');
+        });
+
+        this.classList.add('active');
+        mode = this.id;
+    });
+});
+
 
 function createBoard(size) {
 
@@ -30,29 +48,27 @@ function createBoard(size) {
         const div = document.createElement('div');
         div.style.backgroundColor = 'white';
         board.appendChild(div);
-
-        div.addEventListener("mousedown", function (event) {
-            event.preventDefault();
-            div.style.backgroundColor = color;
-            mouseIsDown = true;
-        })
-
-        div.addEventListener("mouseover", function () {
-            if (mouseIsDown) {
-                div.style.backgroundColor = color;
-            }
-        })
-
-        div.addEventListener("mouseup", function () {
-            mouseIsDown = false;
-        })
+        div.addEventListener("mouseover", changeColor)
+        div.addEventListener("mousedown", changeColor);
+        div.addEventListener("mousedown", (e) => e.preventDefault());
     }
 }
 
-
-document.addEventListener("mouseup", function () {
-    mouseIsDown = false;
-});
+function changeColor(e) {
+    if (e.type === "mouseover" && !mouseIsDown) {
+        return
+    }
+    if (mode === "color") {
+        e.target.style.backgroundColor = color;
+    } else if (mode === "rainbow") {
+        const randR = Math.floor(Math.random() * 256)
+        const randG = Math.floor(Math.random() * 256)
+        const randB = Math.floor(Math.random() * 256)
+        e.target.style.backgroundColor = `rgb(${randR}, ${randG}, ${randB})`
+    } else if (mode === "eraser") {
+        e.target.style.backgroundColor = "white";
+    }
+}
 
 function clearGrid() {
     board.innerHTML = ''

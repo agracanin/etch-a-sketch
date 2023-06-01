@@ -7,11 +7,13 @@
 body {
     display: flex;
     height: 100vh;
+    overflow: auto;
     justify-content: center;
     align-items: center;
     background-color: #EAE8FF;
     flex-direction: column;
     color: #0A0F0D;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -26,6 +28,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
 .board {
@@ -35,6 +38,9 @@ body {
     background-color: #FAFAFF;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: #0A0F0D 0px 3px 8px;
 }
 
 .btn {
@@ -44,6 +50,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     color: inherit;
+    width: 100%;
 }
 
 .btn:hover,
@@ -54,12 +61,14 @@ input[type='color']:hover {
 .grid-size {
     text-align: center;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 input[type='range'] {
     -webkit-appearance: none;
     background-color: inherit;
     cursor: pointer;
+    margin-bottom: 30px;
 }
 
 input[type='range']::-webkit-slider-runnable-track {
@@ -91,6 +100,7 @@ input[type='color'] {
     background-color: inherit;
     color: inherit;
     cursor: pointer;
+    margin-top: 50px;
 }
 
 input[type='color']::-webkit-color-swatch-wrapper {
@@ -101,4 +111,33 @@ input[type='color']::-webkit-color-swatch {
     border: none;
     border-radius: 50px;
     box-shadow: #0A0F0D 0px 3px 8px;
+}
+
+.sketch-container {
+    text-align: center;
+}
+
+.btn-clear {
+    width: 80%;
+    background-color: #0A0F0D;
+    color: #EAE8FF;
+}
+
+.options-btn.active {
+    background-color: #0A0F0D;
+    color: #EAE8FF
+}
+
+
+@media screen and (max-width: 600px) {
+
+    body {
+        min-height: 100vh;
+        height: auto;
+    }
+
+    .container {
+        flex-direction: column-reverse;
+        padding-top: 50px;
+    }
 }
