@@ -138,6 +138,29 @@ input[type='color']::-webkit-color-swatch {
 
     .container {
         flex-direction: column-reverse;
-        padding-top: 50px;
+        padding-top: 20px;
+        gap: 10px;
+    }
+
+    input[type='color'] {
+        margin-top: 0;
+    }
+
+    .options-btn {
+        margin-top: 10px;
+        width: 80%;
+    }
+
+    .board {
+        width: 100%;
+    }
+
+    .btn-eraser {
+        margin-bottom: 20px;
+    }
+
+    input[type='range'] {
+        margin-top: 25px;
+        width: 80%;
     }
 }

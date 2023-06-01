@@ -50,7 +50,11 @@ function createBoard(size) {
         board.appendChild(div);
         div.addEventListener("mouseover", changeColor)
         div.addEventListener("mousedown", changeColor);
+        div.addEventListener("touchstart", changeColor);
+        div.addEventListener("touchmove", changeColor);
         div.addEventListener("mousedown", (e) => e.preventDefault());
+        div.addEventListener("touchstart", (e) => e.preventDefault());
+        div.addEventListener("touchmove", (e) => e.preventDefault());
     }
 }
 
